@@ -1,11 +1,12 @@
 permalink: pretty
 highlighter: rouge
-url: https://playbook.cio.gov
+url: https://tanakaoriginal.github.io/playbook/
 
 collections:
   - plays
+  - plays_ja_jp
 
 markdown: kramdown
 
 sass:
-    sass_dir: assets/_sass
+  sass_dir: assets/_sass
