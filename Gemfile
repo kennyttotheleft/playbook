@@ -5,3 +5,5 @@ gem 'bourbon', '~>7.0.0'
 gem 'neat', '~>1.6.0'
 gem 'jekyll', '~> 3.9.0'
 gem 'kramdown', '~> 2.3.0'
+
+gem "webrick", "~> 1.7"
