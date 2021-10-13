@@ -4,7 +4,7 @@
 $(function () {
   // obtain cookieconsent plugin
   var cc = initCookieConsent();
-  var description = 'This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only upon approval. <a aria-label="Cookie policy" class = "cc-link" href = "/cookies/" >Read more</a>';
+  var description = 'This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only upon approval. <a aria-label="Cookie policy" class = "cc-link" href = "/playbook/cookies/" >Read more</a>';
 
   // run plugin with config object
   cc.run({
