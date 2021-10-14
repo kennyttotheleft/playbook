@@ -10,3 +10,17 @@ markdown: kramdown
 
 sass:
   sass_dir: assets/_sass
+
+exclude:
+  - .github/
+  - .bundle/
+  - .sass-cache/
+  - node_modules/
+  - .gitignore
+  - .ruby-gemset
+  - .ruby-version
+  - Gemfile
+  - Gemfile.lock
+  - package-lock.json
+  - package.json
+  - README.md
