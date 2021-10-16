@@ -16,6 +16,8 @@ exclude:
   - .bundle/
   - .sass-cache/
   - node_modules/
+  - __test__/
+  - .testcaferc.json
   - .gitignore
   - .ruby-gemset
   - .ruby-version
