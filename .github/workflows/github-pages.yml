@@ -8,13 +8,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v2
+      - name: cache node_modules
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      - name: npm install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           enable_jekyll: true
+      - name: Regression test
+        run: npm run test:e2e
