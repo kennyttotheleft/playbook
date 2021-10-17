@@ -9,7 +9,7 @@ const createTestCafe = require('testcafe');
             .src(['__tests__/e2e/'])
             .browsers([
                 // userAgent assignment is only for chrome browser
-                'chrome:emulation:userAgent=TEST_CAFE_REGRESSION',
+                'chrome:headless:userAgent=TEST_CAFE_REGRESSION',
             ])
             .run();
     } finally {
