@@ -31,4 +31,4 @@ jobs:
           publish_dir: ./
           enable_jekyll: true
       - name: Regression test
-        run: npm run test:e2e
+        run: ENVIRONMENT=production npm run test:e2e
