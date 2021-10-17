@@ -7,8 +7,6 @@ on:
       - 'feature/**'
       - 'fix/**'
       - 'hotfix/**'
-    branches-ignore:
-      - 'gh-pages'
 
 jobs:
   deploy:
