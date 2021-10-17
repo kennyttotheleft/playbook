@@ -6,7 +6,7 @@ class CookiePage {
      * @param {string} lang language label
      */
     constructor (lang) {
-        const basePath = 'cookies/';
+        const basePath = '/cookies';
         const siteHelper = new SiteHelper(lang)
         this.pagePath = siteHelper.getPagePath(basePath)
         this.pageUrl = siteHelper.getPageUrl(basePath);
