@@ -3,7 +3,12 @@ name: Unit Test
 on:
   push:
     branches:
-      - '!gh-pages'
+      - main
+      - 'feature/**'
+      - 'fix/**'
+      - 'hotfix/**'
+    branches-ignore:
+      - 'gh-pages'
 
 jobs:
   deploy:
