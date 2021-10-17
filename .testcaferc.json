@@ -1,5 +1,5 @@
 {
-  "src": "__test__/e2e",
+  "src": "__tests__/e2e",
   "reporter": "list",
   "screenshots": {
     "path": "reports/screenshots/",
