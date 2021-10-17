@@ -1,8 +1,0 @@
-{
-  "src": "__tests__/e2e",
-  "reporter": "list",
-  "screenshots": {
-    "path": "reports/screenshots/",
-    "fullPage": true
-  }
-}
