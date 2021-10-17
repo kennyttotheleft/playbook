@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "testcafe": "1.16.1"
+  },
+  "name": "playbook",
+  "description": "Japanese translation project for the U.S. Digital Service Playbook. ",
+  "version": "0.9.0",
+  "main": "index.js",
+  "scripts": {
+    "test:unit": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles",
+    "test:e2e": "node __tests__/e2e/e2e-runner.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanakaoriginal/playbook.git"
+  },
+  "keywords": [],
+  "author": "tanakaoriginal",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/tanakaoriginal/playbook/issues"
+  },
+  "homepage": "https://github.com/tanakaoriginal/playbook#readme",
+  "devDependencies": {
+    "jest": "27.2.5"
+  },
+  "type": "module",
+  "jest": {
+    "verbose": true,
+    "testRegex": "(/__tests__/unit/.*|(\\.|/)(test|spec))\\.[jt]sx?$"
+  }
+}

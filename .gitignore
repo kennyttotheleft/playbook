@@ -3,3 +3,4 @@ _site/*
 notes/*
 .sass-cache/*
 .bundle
+node_modules/
