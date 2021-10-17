@@ -15,7 +15,7 @@ describe('testHelper', () => {
 
     afterAll(() => {});
 
-    testTitle = 'getCaseCode(%s, %i)';
+    testTitle = 'getCaseCode(%s, %i) -> %s';
     test.each([
         [undefined, undefined, ''],
         [undefined, null, ''],
@@ -50,7 +50,7 @@ describe('testHelper', () => {
         expect(getCaseCode(testCode, caseNumber)).toBe(expected);
     });
 
-    testTitle = 'getCaseTitle(%s, %s)';
+    testTitle = 'getCaseTitle(%s, %s) -> %s';
     test.each([
         [undefined, undefined, ''],
         [undefined, null, ''],
