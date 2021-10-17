@@ -1,4 +1,4 @@
-const PROD_URL = 'https://tanakaoriginal.github.io/playbook';
+const PROD_URL = 'https://tanakaoriginal.github.io';
 const TESTING_URL = '';
 const STG_URL = '';
 const DEV_URL = '';
@@ -10,8 +10,15 @@ const TESTING_LABEL = 'testing';
 const DEV_LABEL = 'development';
 const LOCAL_LABEL = 'local';
 
-const PAGE_ROOT_PATH_EN_US = '/';
-const PAGE_ROOT_PATH_JA_JP = '/ja_jp/';
+const CONTENT_ROOT_PATH_LOCAL = '/';
+const CONTENT_ROOT_PATH_DEV = '/';
+const CONTENT_ROOT_PATH_STG = '/';
+const CONTENT_ROOT_PATH_TESTING = '/';
+const CONTENT_ROOT_PATH_PROD = '/playbook';
+
+const LANG_ROOT_PATH_EN_US = '/';
+const LANG_ROOT_PATH_JA_JP = '/ja_jp';
+
 const LANG_LABEL_EN_US = 'en_us';
 const LANG_LABEL_JA_JP = 'ja_jp';
 
@@ -70,14 +77,51 @@ function getSiteUrl(env) {
  *   * ja_jp
  * @returns {string}
  */
-function getLangRootPath(lang) {
+function getLangRootPath(lang, env) {
+
+    let contentRootPath = '';
+    switch (env) {
+        case PROD_LABEL:
+            contentRootPath = CONTENT_ROOT_PATH_PROD;
+            break;
+        case TESTING_LABEL:
+            contentRootPath = CONTENT_ROOT_PATH_TESTING;
+            break;
+        case STG_LABEL:
+            contentRootPath = CONTENT_ROOT_PATH_STG;
+            break;
+        case DEV_LABEL:
+            contentRootPath = CONTENT_ROOT_PATH_DEV;
+            break;
+        case LOCAL_LABEL:
+            contentRootPath = CONTENT_ROOT_PATH_LOCAL;
+            break;
+        default:
+            contentRootPath = CONTENT_ROOT_PATH_LOCAL;
+            break;
+    }
+
+    let langRootPath = '';
     switch (lang) {
         case LANG_LABEL_EN_US:
-            return PAGE_ROOT_PATH_EN_US;
+            langRootPath = LANG_ROOT_PATH_EN_US;
+            break;
         case LANG_LABEL_JA_JP:
-            return PAGE_ROOT_PATH_JA_JP;
+            langRootPath = LANG_ROOT_PATH_JA_JP;
+            break;
         default:
-            return PAGE_ROOT_PATH_EN_US;
+            langRootPath = LANG_ROOT_PATH_EN_US;
+            break;
+    }
+
+    if (contentRootPath === '/' && langRootPath === '/') {
+        return contentRootPath;
+    } else if (contentRootPath !== '/' && langRootPath === '/') {
+        return contentRootPath;
+    } else if (contentRootPath === '/' && langRootPath !== '/') {
+        return langRootPath;
+    } else {
+        return contentRootPath + langRootPath;
     }
 }
 
@@ -95,7 +139,10 @@ function getLangRootPath(lang) {
  */
 function getLangRootUrl(lang, env) {
     const siteRootUrl = getSiteUrl(env);
-    const langRootPath = getLangRootPath(lang);
+    const langRootPath = getLangRootPath(lang, env);
+    if(langRootPath === '/') {
+        return siteRootUrl;
+    }
     return siteRootUrl + langRootPath;
 }
 
@@ -115,11 +162,24 @@ class SiteHelper {
      * @returns {string}
      */
     getPagePath(pageBasePath) {
-        const langRootPath = getLangRootPath(this.lang);
-        if (!pageBasePath || pageBasePath === '/') {
-            return langRootPath;
+        if (!pageBasePath) {
+            return '';
         }
-        return langRootPath + pageBasePath;
+        const env = getEnv();
+        const langRootPath = getLangRootPath(this.lang, env);
+
+        if (langRootPath === '/' && pageBasePath === '/') {
+            return pageBasePath;
+        } else if (langRootPath !== '/' && pageBasePath === '/') {
+            // Return the URL with trailing slash
+            return langRootPath + '/';
+        } else if (langRootPath === '/' && pageBasePath !== '/') {
+            // Return the URL with trailing slash
+            return pageBasePath + '/';
+        } else {
+            // Return the URL with trailing slash
+            return langRootPath + pageBasePath + '/';
+        }
     }
 
     /**
@@ -128,12 +188,23 @@ class SiteHelper {
      * @returns {string}
      */
     getPageUrl(pageBasePath) {
+        if (!pageBasePath) {
+            return '';
+        }
         const env = getEnv();
         const langRootUrl = getLangRootUrl(this.lang, env);
-        if (!pageBasePath || pageBasePath === '/') {
-            return langRootUrl;
+        if(!langRootUrl === '/' && pageBasePath === '/') {
+            return pageBasePath;
+        } else if(langRootUrl !== '/' && pageBasePath === '/') {
+            // Return the URL with trailing slash
+            return langRootUrl + '/';
+        } else if(langRootUrl === '/' && pageBasePath !== '/') {
+            // Return the URL with trailing slash
+            return pageBasePath + '/';
+        } else {
+            // Return the URL with trailing slash
+            return langRootUrl + pageBasePath + '/';
         }
-        return langRootUrl + pageBasePath;
     }
 }
 
